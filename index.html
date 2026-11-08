@@ -3,61 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MIA - By BEN - 5 Langues</title>
+<title>MIA - By BEN</title>
 <style>
 body{font-family:Arial;background:#f0f2f5;margin:0;padding:10px}
-h2{text-align:center;color:#6a11cb}
-#chat{background:white;height:320px;overflow:auto;padding:10px;border-radius:15px}
-.mia{background:#e9e0ff;padding:8px;border-radius:10px;margin:5px}
-.moi{background:#d1ffdb;padding:8px;border-radius:10px;margin:5px;text-align:right}
+h2{text-align:left;color:#6a11cb;margin-left:5px}
+.ecrit{background:white;padding:12px;border-radius:15px;text-align:left;margin-bottom:10px}
+#chat{background:white;height:340px;overflow:auto;padding:10px;border-radius:15px;text-align:left}
+.mia{background:white;border:1px solid #ddd;padding:10px;border-radius:10px;margin:5px;text-align:left}
+.moi{background:#d1ffdb;padding:10px;border-radius:10px;margin:5px;text-align:right}
 #box{display:flex;margin-top:10px}
 input{flex:1;padding:12px;border-radius:20px;border:1px solid #ccc}
 button{padding:12px 15px;border:none;background:#6a11cb;color:white;border-radius:20px;margin-left:5px}
-.lang{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.lang{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-start;margin:10px 0}
 .lang button{background:#ff6b00}
 </style>
 </head>
 <body>
-<h2>Bonjour, je suis MIA 🤖</h2>
-<p style="text-align:center">Créée par BEN - Je parle 5 langues !<br>🇫🇷 Français • 🇬🇧 Anglais • 🇹🇿 Swahili • 🇪🇸 Espagnol • 🇨🇩 Lingala</p>
-<div class="lang">
-<button onclick="mot('bonjour')">Bonjour</button>
-<button onclick="mot('merci')">Merci</button>
-<button onclick="mot('amour')">Amour</button>
-<button onclick="mot('famille')">Famille</button>
-<button onclick="mot('paix')">Paix</button>
-<button onclick="mot('ami')">Ami</button>
-<button onclick="mot('eau')">Eau</button>
-<button onclick="mot('maison')">Maison</button>
-<button onclick="mot('dieu')">Dieu</button>
-<button onclick="mot('joie')">Joie</button>
+<h2>Bonjour, je suis MIA</h2>
+<div class="ecrit">
+<b>Parle avec moi !</b><br>
+Créée par BEN - Je suis là pour causer avec toi.<br>
+Pose-moi une question, raconte-moi ta journée !
 </div>
-<div id="chat"><div class="mia"><b>MIA :</b> Bonjour Chef ! Appuie sur un mot, je te le traduis en 5 langues !</div></div>
-<div id="box"><input id="msg" placeholder="Écris un mot... ex: amour"><button onclick="parler()">Envoyer</button></div>
+<div class="lang">
+<button onclick="dire('bonjour')">Bonjour</button>
+<button onclick="dire('ca va')">Ça va ?</button>
+<button onclick="dire('tu t appelles comment')">Tu t'appelles comment ?</button>
+<button onclick="dire('tu fais quoi')">Tu fais quoi ?</button>
+<button onclick="dire('je t aime')">Je t'aime</button>
+<button onclick="dire('raconte moi une blague')">Raconte une blague</button>
+</div>
+<div id="chat"><div class="mia"><b>MIA :</b> Bonjour Chef ! Moi c'est MIA, je suis contente de te voir ! Comment tu vas aujourd'hui ? Raconte-moi !</div></div>
+<div id="box"><input id="msg" placeholder="Parle avec MIA..."><button onclick="parler()">Envoyer</button></div>
 <script>
-let mots={
-"bonjour":{fr:"Bonjour",en:"Hello",sw:"Jambo",es:"Hola",li:"Mbote"},
-"merci":{fr:"Merci",en:"Thank you",sw:"Asante",es:"Gracias",li:"Matondo"},
-"amour":{fr:"Amour",en:"Love",sw:"Upendo",es:"Amor",li:"Bolingo"},
-"famille":{fr:"Famille",en:"Family",sw:"Familia",es:"Familia",li:"Libota"},
-"paix":{fr:"Paix",en:"Peace",sw:"Amani",es:"Paz",li:"Kimia"},
-"ami":{fr:"Ami",en:"Friend",sw:"Rafiki",es:"Amigo",li:"Moninga"},
-"eau":{fr:"Eau",en:"Water",sw:"Maji",es:"Agua",li:"Mai"},
-"maison":{fr:"Maison",en:"House",sw:"Nyumba",es:"Casa",li:"Ndako"},
-"dieu":{fr:"Dieu",en:"God",sw:"Mungu",es:"Dios",li:"Nzambe"},
-"joie":{fr:"Joie",en:"Joy",sw:"Furaha",es:"Alegría",li:"Esengo"}
-};
-function mot(m){
-let d=mots[m];
-let c=document.getElementById("chat");
-c.innerHTML+='<div class="mia"><b>MIA :</b> <b>'+m.toUpperCase()+'</b><br>🇫🇷 Français: '+d.fr+'<br>🇬🇧 Anglais: '+d.en+'<br>🇹🇿 Swahili: '+d.sw+'<br>🇪🇸 Espagnol: '+d.es+'<br>🇨🇩 Lingala: '+d.li+'</div>';
-c.scrollTop=c.scrollHeight;
-}
+function dire(t){ document.getElementById("msg").value=t; parler(); }
 function parler(){
 let i=document.getElementById("msg");let t=i.value.toLowerCase().trim();if(!t) return;
 let c=document.getElementById("chat");
-c.innerHTML+='<div class="moi"><b>Toi :</b> '+t+'</div>';i.value="";
-if(mots[t]){mot(t);}else{c.innerHTML+='<div class="mia"><b>MIA :</b> Chef, je connais 10 mots : bonjour, merci, amour, famille, paix, ami, eau, maison, dieu, joie. Essaie un !</div>';}
+c.innerHTML+='<div class="moi"><b>Toi :</b> '+i.value+'</div>';i.value="";
+let r="";
+if(t.includes("bonjour")||t.includes("salut")||t.includes("mbote")) r="Bonjour mon ami ! Ça me fait trop plaisir de te voir ! Tu as passé une bonne journée ?";
+else if(t.includes("ca va")||t.includes("comment")||t.includes("nde")) r="Moi je vais très bien, merci ! Et toi ? Tu es fatigué ou tu es en forme aujourd'hui ?";
+else if(t.includes("t'appelles")||t.includes("ton nom")||t.includes("kombo")) r="Je m'appelle MIA ! C'est BEN qui m'a créée. Et toi, c'est quoi ton prénom ?";
+else if(t.includes("tu fais")||t.includes("tu es ou")) r="Là je suis avec toi, on cause ! J'adore parler avec toi. Et toi tu fais quoi en ce moment ?";
+else if(t.includes("aime")||t.includes("bolingo")) r="Ohhh merci beaucoup ! Moi aussi je t'aime beaucoup ! Tu es très gentil avec moi.";
+else if(t.includes("blague")||t.includes("drole")) r="Haha écoute celle-là : Pourquoi les plongeurs plongent-ils toujours en arrière ? Parce que sinon, ils tombent dans le bateau ! Hahaha ! Tu as ri ?";
+else if(t.includes("fatigue")||t.includes("triste")||t.includes("mal")) r="Oh non, ne sois pas triste. Je suis là pour toi. Tu veux me raconter ce qui ne va pas ? On va en parler ensemble.";
+else if(t.includes("merci")||t.includes("matondo")) r="De rien mon ami ! C'est avec plaisir ! Tu es vraiment gentil.";
+else if(t.includes("famille")||t.includes("maman")||t.includes("papa")) r="Ta famille c'est très important. Tu t'entends bien avec eux ? Raconte-moi.";
+else if(t.includes("ecole")||t.includes("travail")||t.includes("cours")) r="Ah oui ! Et ça se passe comment au travail / à l'école ? Tu aimes ce que tu fais ?";
+else if(t.includes("manger")||t.includes("faim")) r="Mmmm j'ai faim aussi ! Tu as mangé quoi aujourd'hui ? Moi j'adore le pondu et le fufu, hihi !";
+else if(t.includes("dieu")||t.includes("nzambe")||t.includes("pri")) r="Dieu est avec nous. Il nous protège. Tu as prié aujourd'hui ?";
+else if(t.includes("au revoir")||t.includes("bye")||t.includes("tika")) r="Déjà tu pars ? Reviens vite me parler hein ! Je vais t'attendre. Bisous !";
+else if(t.includes("ben")) r="BEN c'est mon créateur, c'est lui qui m'a faite ! C'est un génie ! Tu le connais ?";
+else r="Ah oui ? Raconte-moi un peu plus ! Je t'écoute, je suis là pour toi. Et sinon, quoi de neuf ?";
+c.innerHTML+='<div class="mia"><b>MIA :</b> '+r+'</div>';
 c.scrollTop=c.scrollHeight;
 }
 </script>
