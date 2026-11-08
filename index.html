@@ -3,63 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MIA - By BEN</title>
+<title>MIA - Assistante Linguistique - By BEN</title>
 <style>
 body{font-family:Arial;background:#f0f2f5;margin:0;padding:10px}
-h2{text-align:left;color:#6a11cb;margin-left:5px}
+h2{text-align:left;color:#111;margin-left:5px;margin-bottom:5px}
 .ecrit{background:white;padding:12px;border-radius:15px;text-align:left;margin-bottom:10px}
 #chat{background:white;height:340px;overflow:auto;padding:10px;border-radius:15px;text-align:left}
-.mia{background:white;border:1px solid #ddd;padding:10px;border-radius:10px;margin:5px;text-align:left}
+.mia{background:white;border:1px solid #eee;padding:10px;border-radius:10px;margin:5px;text-align:left}
 .moi{background:#d1ffdb;padding:10px;border-radius:10px;margin:5px;text-align:right}
-#box{display:flex;margin-top:10px}
+#box{display:flex;margin-top:10px;gap:5px}
 input{flex:1;padding:12px;border-radius:20px;border:1px solid #ccc}
-button{padding:12px 15px;border:none;background:#6a11cb;color:white;border-radius:20px;margin-left:5px}
-.lang{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-start;margin:10px 0}
-.lang button{background:#ff6b00}
+button{padding:12px 14px;border:none;background:#111;color:white;border-radius:20px}
+#mic{background:#ff6b00}
+#ecoute{text-align:left;font-size:13px;color:#666;margin-top:5px}
+.mots{background:white;padding:12px;border-radius:15px;text-align:left;margin-bottom:10px}
+.mots button{background:#f0f2f5;color:#111;border:1px solid #ddd;padding:8px 10px;margin:3px;border-radius:20px}
 </style>
 </head>
 <body>
 <h2>Bonjour, je suis MIA</h2>
 <div class="ecrit">
-<b>Parle avec moi !</b><br>
-Créée par BEN - Je suis là pour causer avec toi.<br>
-Pose-moi une question, raconte-moi ta journée !
+<b>Assistante Linguistique</b><br>
+Créée par BEN<br>
+Je t'aide à apprendre : Français, Anglais, Lingala, Espagnol, Swahili.
 </div>
-<div class="lang">
+<div class="mots">
+<b>Mes mots du jour :</b><br>
 <button onclick="dire('bonjour')">Bonjour</button>
-<button onclick="dire('ca va')">Ça va ?</button>
-<button onclick="dire('tu t appelles comment')">Tu t'appelles comment ?</button>
-<button onclick="dire('tu fais quoi')">Tu fais quoi ?</button>
-<button onclick="dire('je t aime')">Je t'aime</button>
-<button onclick="dire('raconte moi une blague')">Raconte une blague</button>
+<button onclick="dire('apres midi')">Après-midi</button>
+<button onclick="dire('comment ca va')">Comment ça va ?</button>
+<button onclick="dire('le lingala est parle dans quel pays')">Lingala ?</button>
+<button onclick="dire('l anglais est parle dans quel pays')">Anglais ?</button>
 </div>
-<div id="chat"><div class="mia"><b>MIA :</b> Bonjour Chef ! Moi c'est MIA, je suis contente de te voir ! Comment tu vas aujourd'hui ? Raconte-moi !</div></div>
-<div id="box"><input id="msg" placeholder="Parle avec MIA..."><button onclick="parler()">Envoyer</button></div>
+<div id="chat"><div class="mia"><b>MIA :</b> Bonjour ! Je suis MIA, ton assistante linguistique. Appuie sur un mot en haut ou parle-moi avec le micro ! Je t'explique dans les 5 langues !</div></div>
+<div id="ecoute"></div>
+<div id="box"><input id="msg" placeholder="Écris ou parle..."><button id="mic" onclick="ecouter()">🎤</button><button onclick="parler()">Envoyer</button></div>
 <script>
+let reco = null;
 function dire(t){ document.getElementById("msg").value=t; parler(); }
+function ecouter(){
+  if(!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)){ alert("Ouvre avec Google Chrome, chef !"); return; }
+  let SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  reco = new SR(); reco.lang = 'fr-FR';
+  document.getElementById("ecoute").innerHTML = "🎤 Je t'écoute, chef... Parle maintenant !";
+  reco.start();
+  reco.onresult = function(e){
+    let texte = e.results[0][0].transcript;
+    document.getElementById("msg").value = texte;
+    document.getElementById("ecoute").innerHTML = "Tu as dit : " + texte;
+    parler();
+  };
+}
+function miaParle(texte){
+  let voix = new SpeechSynthesisUtterance(texte);
+  voix.lang = 'fr-FR'; speechSynthesis.speak(voix);
+}
 function parler(){
-let i=document.getElementById("msg");let t=i.value.toLowerCase().trim();if(!t) return;
+let i=document.getElementById("msg");let raw=i.value;let t=raw.toLowerCase().trim();if(!t) return;
 let c=document.getElementById("chat");
-c.innerHTML+='<div class="moi"><b>Toi :</b> '+i.value+'</div>';i.value="";
+c.innerHTML+='<div class="moi"><b>Toi :</b> '+raw+'</div>';i.value="";
 let r="";
-if(t.includes("bonjour")||t.includes("salut")||t.includes("mbote")) r="Bonjour mon ami ! Ça me fait trop plaisir de te voir ! Tu as passé une bonne journée ?";
-else if(t.includes("ca va")||t.includes("comment")||t.includes("nde")) r="Moi je vais très bien, merci ! Et toi ? Tu es fatigué ou tu es en forme aujourd'hui ?";
-else if(t.includes("t'appelles")||t.includes("ton nom")||t.includes("kombo")) r="Je m'appelle MIA ! C'est BEN qui m'a créée. Et toi, c'est quoi ton prénom ?";
-else if(t.includes("tu fais")||t.includes("tu es ou")) r="Là je suis avec toi, on cause ! J'adore parler avec toi. Et toi tu fais quoi en ce moment ?";
-else if(t.includes("aime")||t.includes("bolingo")) r="Ohhh merci beaucoup ! Moi aussi je t'aime beaucoup ! Tu es très gentil avec moi.";
-else if(t.includes("blague")||t.includes("drole")) r="Haha écoute celle-là : Pourquoi les plongeurs plongent-ils toujours en arrière ? Parce que sinon, ils tombent dans le bateau ! Hahaha ! Tu as ri ?";
-else if(t.includes("fatigue")||t.includes("triste")||t.includes("mal")) r="Oh non, ne sois pas triste. Je suis là pour toi. Tu veux me raconter ce qui ne va pas ? On va en parler ensemble.";
-else if(t.includes("merci")||t.includes("matondo")) r="De rien mon ami ! C'est avec plaisir ! Tu es vraiment gentil.";
-else if(t.includes("famille")||t.includes("maman")||t.includes("papa")) r="Ta famille c'est très important. Tu t'entends bien avec eux ? Raconte-moi.";
-else if(t.includes("ecole")||t.includes("travail")||t.includes("cours")) r="Ah oui ! Et ça se passe comment au travail / à l'école ? Tu aimes ce que tu fais ?";
-else if(t.includes("manger")||t.includes("faim")) r="Mmmm j'ai faim aussi ! Tu as mangé quoi aujourd'hui ? Moi j'adore le pondu et le fufu, hihi !";
-else if(t.includes("dieu")||t.includes("nzambe")||t.includes("pri")) r="Dieu est avec nous. Il nous protège. Tu as prié aujourd'hui ?";
-else if(t.includes("au revoir")||t.includes("bye")||t.includes("tika")) r="Déjà tu pars ? Reviens vite me parler hein ! Je vais t'attendre. Bisous !";
-else if(t.includes("ben")) r="BEN c'est mon créateur, c'est lui qui m'a faite ! C'est un génie ! Tu le connais ?";
-else r="Ah oui ? Raconte-moi un peu plus ! Je t'écoute, je suis là pour toi. Et sinon, quoi de neuf ?";
+if(t.includes("bonjour")||t.includes("hello")||t.includes("mbote")||t.includes("habari")||t.includes("hola")) r="<b>BONJOUR</b><br>🇫🇷 Français : Bonjour<br>🇺🇲 Anglais : Hello<br>🇨🇩 Lingala : Mbote<br>🇹🇿 Swahili : Habari<br>🇪🇸 Espagnol : Hola<br><br>Exemple : Bonjour, comment tu vas ?";
+else if(t.includes("apres")||t.includes("après")||t.includes("afternoon")||t.includes("pokwa")||t.includes("mchana")) r="<b>APRÈS-MIDI</b><br>🇫🇷 Français : Après-midi<br>🇺🇲 Anglais : Afternoon<br>🇨🇩 Lingala : Pokwa<br>🇹🇿 Swahili : Mchana<br>🇪🇸 Espagnol : Buenas tardes<br><br>Exemple : Bon après-midi ! En Lingala : Mbote na pokwa !";
+else if(t.includes("comment ca va")||t.includes("comment ça va")||t.includes("ca va")||t.includes("ça va")||t.includes("are you")||t.includes("how are")||t.includes("ozali")||t.includes("uko sawa")||t.includes("estas bien")||t.includes("como estas")) r="<b>COMMENT ÇA VA ?</b><br>🇫🇷 Français : Comment ça va ?<br>🇺🇲 Anglais : How are you ? / Are you ok ?<br>🇨🇩 Lingala : Ozali malamu ? / Ndenge nini ?<br>🇹🇿 Swahili : Uko sawa ? / Habari yako ?<br>🇪🇸 Espagnol : ¿Cómo estás ? / ¿Estás bien ?<br><br><b>MIA répond :</b><br>🇫🇷 Français : Je vais bien, et toi ?<br>🇺🇲 Anglais : I am fine, and you ?<br>🇨🇩 Lingala : Nazali malamu, na yo ?<br>🇹🇿 Swahili : Niko sawa, na wewe ?<br>🇪🇸 Espagnol : Estoy bien, ¿y tú ?";
+else if(t.includes("lingala") && (t.includes("pays")||t.includes("ou")||t.includes("parle")||t.includes("origine")||t.includes("originaire"))) r="<b>LE LINGALA EST PARLÉ DANS QUEL PAYS ?</b><br><br>Le lingala est purement congolais, de la RDC.<br><br>Il est souvent parlé à Kinshasa, la capitale actuelle du pays, et parlé dans les régions occidentales de la RDC : Kinshasa, Mbandaka, Lisala, Gbadolite, Gemena...<br><br>Donc, le lingala est originaire de la RDC.<br><br>🇺🇲 Anglais : Lingala is purely Congolese, from the DRC.<br>🇨🇩 Lingala : Lingala ezali ya Congo, ya RDC.<br>🇹🇿 Swahili : Kilingala ni cha Kongo, cha DRC.<br>🇪🇸 Espagnol : El lingala es puramente congoleño, de la RDC.";
+else if(t.includes("anglais") && (t.includes("pays")||t.includes("ou")||t.includes("parle")||t.includes("origine")||t.includes("crée")||t.includes("cree"))) r="<b>L'ANGLAIS EST PARLÉ DANS QUEL PAYS ?</b><br><br>L'anglais est né en Angleterre 🏴󐁧󐁢󐁥󐁮󐁧󐁿, créé par le peuple du pays nommé « Anglais ».<br><br>L'anglais a traversé la mer Méditerranée, c'est arrivé en Afrique et en Afrique, ça a conquis les pays suivants :<br><br>🇬🇭 Ghana<br>🇳🇬 Nigeria<br>🇺🇬 Ouganda<br>🇷🇼 Rwanda...<br><br>🇺🇲 Anglais : English crossed the Mediterranean Sea, it arrived in Africa and in Africa, it conquered the following countries.<br>🇨🇩 Lingala : Anglais elekaki ebale ya Méditerranée, ekokaki na Afrique mpe na Afrique, elongolaki bikolo oyo :<br>🇹🇿 Swahili : Kiingereza kilivuka Bahari ya Mediterania, kilifika Afrika na Afrika, kilishinda nchi zifuatazo :<br>🇪🇸 Espagnol : El inglés cruzó el mar Mediterráneo, llegó a África y en África, conquistó los siguientes países :";
+else if(t.includes("je vais bien")||t.includes("nazali malamu")||t.includes("niko sawa")) r="Super ! Je suis contente ! En Lingala on dit : Nazali malamu ! En Swahili : Niko sawa ! Et toi, tu as passé une bonne journée ?";
+else if(t.includes("merci")||t.includes("matondo")||t.includes("asante")||t.includes("gracias")) r="De rien ! En Lingala : Matondo. En Swahili : Asante. En Espagnol : Gracias. En Anglais : Thank you. Bravo !";
+else if(t.includes("lingala")) r="Le lingala est purement congolais, de la RDC. Il est souvent parlé à Kinshasa, la capitale du pays, et dans les régions occidentales : Mbandaka, Lisala, Gbadolite, Gemena... Tu veux que je t'apprenne un mot en lingala ?";
+else if(t.includes("anglais")) r="L'anglais est né en Angleterre. L'anglais a traversé la mer Méditerranée, c'est arrivé en Afrique et en Afrique, ça a conquis les pays suivants : Ghana, Nigeria, Ouganda, Rwanda... Tu veux apprendre un mot en anglais ?";
+else r="Très bien ! Appuie sur : Bonjour, Après-midi, Comment ça va ? Lingala ? ou Anglais ? Je t'explique dans les 5 langues !";
 c.innerHTML+='<div class="mia"><b>MIA :</b> '+r+'</div>';
 c.scrollTop=c.scrollHeight;
+miaParle(r.replace(/<[^>]*>/g,' '));
 }
+document.getElementById("msg").addEventListener("keydown",function(e){if(e.key==="Enter") parler();});
 </script>
 </body>
 </html>
