@@ -1,0 +1,42 @@
+{
+  "annee": {
+    "mot": "Année",
+    "sens": "Une période de 12 mois, de janvier à décembre",
+    "signification": "L'année c'est 12 mois, 365 jours, on fête la nouvelle année le 1er janvier",
+    "synonyme": "Mobu",
+    "contraire": "Jour / Mois",
+    "traductions": { "francais": "Année", "lingala": "Mobu", "anglais": "Year", "espagnol": "Año", "swahili": "Mwaka" }
+  },
+  "matinee": {
+    "mot": "Matinée",
+    "sens": "Toute la partie du matin, de 6h à midi",
+    "signification": "La matinée c'est tout le matin, pour travailler ou aller à l'école le matin",
+    "synonyme": "Tongo mobimba",
+    "contraire": "Soirée",
+    "traductions": { "francais": "Matinée", "lingala": "Tongo mobimba", "anglais": "Morning", "espagnol": "Mañana", "swahili": "Asubuhi" }
+  },
+  "midi": {
+    "mot": "Midi",
+    "sens": "Le milieu de la journée, à 12h",
+    "signification": "C'est à 12h, quand le soleil est au milieu du ciel, on mange à midi",
+    "synonyme": "12h",
+    "contraire": "Minuit",
+    "traductions": { "francais": "Midi", "lingala": "Midi / Kati ya moyi", "anglais": "Noon / Midday", "espagnol": "Mediodía", "swahili": "Mchana" }
+  },
+  "soir": {
+    "mot": "Soir",
+    "sens": "La fin de la journée, quand le soleil se couche",
+    "signification": "Le soir c'est de 17h à 20h, on dit Bonsoir le soir",
+    "synonyme": "Pokwa",
+    "contraire": "Matin",
+    "traductions": { "francais": "Soir", "lingala": "Pokwa", "anglais": "Evening", "espagnol": "Noche / Tarde", "swahili": "Jioni" }
+  },
+  "nuit": {
+    "mot": "Nuit",
+    "sens": "Le moment où il fait noir, on dort",
+    "signification": "La nuit c'est quand il fait noir, de 20h à 6h du matin, on dort la nuit",
+    "synonyme": "Butu",
+    "contraire": "Jour",
+    "traductions": { "francais": "Nuit", "lingala": "Butu", "anglais": "Night", "espagnol": "Noche", "swahili": "Usiku" }
+  }
+}
