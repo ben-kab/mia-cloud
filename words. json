@@ -1,0 +1,66 @@
+{
+  "merci": {
+    "mot": "Merci",
+    "sens": "Dire merci pour remercier quelqu'un",
+    "signification": "Je te dis merci parce que tu m'as aidé",
+    "synonyme": "Matondi",
+    "contraire": "De rien",
+    "traductions": { "francais": "Merci", "lingala": "Matondi", "anglais": "Thank you", "espagnol": "Gracias", "swahili": "Asante" }
+  },
+  "bonjour": {
+    "mot": "Bonjour",
+    "sens": "Saluer quelqu'un le matin",
+    "signification": "Je te souhaite une bonne journée",
+    "synonyme": "Salut / Mbote",
+    "contraire": "Au revoir",
+    "traductions": { "francais": "Bonjour", "lingala": "Mbote", "anglais": "Hello / Good morning", "espagnol": "Hola / Buenos días", "swahili": "Jambo / Habari" }
+  },
+  "salut": {
+    "mot": "Salut",
+    "sens": "Saluer quelqu'un qu'on connaît bien",
+    "signification": "C'est comme Bonjour mais plus familier, pour les amis",
+    "synonyme": "Bonjour / Mbote",
+    "contraire": "Au revoir",
+    "traductions": { "francais": "Salut", "lingala": "Mbote", "anglais": "Hi / Hey", "espagnol": "Hola", "swahili": "Jambo / Mambo" }
+  },
+  "bonsoir": {
+    "mot": "Bonsoir",
+    "sens": "Saluer quelqu'un le soir",
+    "signification": "Je te souhaite une bonne soirée",
+    "synonyme": "Mbote ya pokwa",
+    "contraire": "Bonne nuit",
+    "traductions": { "francais": "Bonsoir", "lingala": "Mbote ya pokwa", "anglais": "Good evening", "espagnol": "Buenas noches", "swahili": "Jioni njema" }
+  },
+  "apres midi": {
+    "mot": "Après midi",
+    "sens": "La partie de la journée après midi",
+    "signification": "Après 12h jusqu'au soir, on dit Bon après-midi",
+    "synonyme": "Bon après-midi",
+    "contraire": "Matin",
+    "traductions": { "francais": "Après midi", "lingala": "Sima ya midi", "anglais": "Afternoon", "espagnol": "Tarde", "swahili": "Mchana" }
+  },
+  "matin": {
+    "mot": "Matin",
+    "sens": "Le début de la journée, quand le soleil se lève",
+    "signification": "Le matin c'est de 6h à 12h, on dit Bonjour le matin",
+    "synonyme": "Tongo",
+    "contraire": "Soir / Nuit",
+    "traductions": { "francais": "Matin", "lingala": "Tongo", "anglais": "Morning", "espagnol": "Mañana", "swahili": "Asubuhi" }
+  },
+  "mi nuit": {
+    "mot": "Mi nuit",
+    "sens": "Le milieu de la nuit, vers 00h",
+    "signification": "C'est quand tout le monde dort, au milieu de la nuit, à minuit",
+    "synonyme": "Minuit",
+    "contraire": "Midi",
+    "traductions": { "francais": "Mi nuit", "lingala": "Kati ya butu", "anglais": "Midnight", "espagnol": "Medianoche", "swahili": "Usiku wa manane" }
+  },
+  "mi annee": {
+    "mot": "Mi année",
+    "sens": "Le milieu de l'année, après 6 mois",
+    "signification": "C'est quand on a fait la moitié de l'année, vers le mois de juin",
+    "synonyme": "Milieu de l'année",
+    "contraire": "Début d'année / Fin d'année",
+    "traductions": { "francais": "Mi année", "lingala": "Kati kati ya mobu", "anglais": "Mid-year", "espagnol": "Mitad del año", "swahili": "Nusu mwaka" }
+  }
+}
